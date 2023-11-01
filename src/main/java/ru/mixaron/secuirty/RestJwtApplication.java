@@ -1,7 +1,9 @@
 package ru.mixaron.secuirty;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class RestJwtApplication {
@@ -10,4 +12,8 @@ public class RestJwtApplication {
 		SpringApplication.run(RestJwtApplication.class, args);
 	}
 
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 }

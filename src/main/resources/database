@@ -1,0 +1,34 @@
+CREATE TABLE shop_category(
+    id serial,
+    category_name varchar not null unique
+);
+
+CREATE TABLE shop_product(
+                             id uuid,
+                             name varchar not null unique primary key,
+                             description text not null,
+                             category varchar not null references shop_category(category_name)
+
+);
+
+
+
+
+CREATE TABLE shop_person(
+                            id uuid,
+                            email text not null unique primary key,
+                            password text,
+                            name text,
+                            role varchar
+);
+
+
+
+
+CREATE TABLE orders(
+                       id uuid primary key,
+                       person_email text references shop_person(email) not null,
+                       product_name text references shop_product(name) not null,
+                       status varchar not null,
+                       date_of_creation timestamp not null
+);

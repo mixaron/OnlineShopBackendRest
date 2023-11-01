@@ -1,37 +1,56 @@
 package ru.mixaron.secuirty.models;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.mixaron.secuirty.util.Role;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
-@Table(name = "_user")
-@Data
+@Table(name = "shop_person")
+@Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+public class Person implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-    private String firstname;
-
-    private String lastname;
-
+    @Column(name = "email")
+    @Email(message = "wrong form email address")
+    @NotEmpty(message = "email must be not empty")
     private String email;
 
+    @Column(name = "password")
+    @NotEmpty
     private String password;
+
+    @Column(name = "name")
+    @NotEmpty
+    private String username;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
+    @OneToMany(mappedBy = "person")
+    Set<Order> orders;
+
+    public Person(String email) {
+        this.email = email;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

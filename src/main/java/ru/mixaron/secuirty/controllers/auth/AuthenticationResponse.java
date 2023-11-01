@@ -1,4 +1,4 @@
-package ru.mixaron.secuirty.config.controllers.auth;
+package ru.mixaron.secuirty.controllers.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,5 +1,6 @@
 package ru.mixaron.secuirty.util;
 
 public enum Role {
-    USER
+    ROLE_USER,
+    ROLE_ADMIN
 }
