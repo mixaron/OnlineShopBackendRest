@@ -76,6 +76,11 @@ public class GlobalExceptionController {
         ErrorResponse errorResponse = new ErrorResponse("Password problem", new Date());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(NotFoundCategoryByName.class)
+    public ResponseEntity<ErrorResponse> NotFoundCategory(NotFoundCategoryByName e) {
+        ErrorResponse errorResponse = new ErrorResponse("Not found Category by name", new Date());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
     // не работает
 //    @ExceptionHandler(ExpiredJwtException.class)
 //    public ResponseEntity<ErrorResponse> jwtExpired(ExpiredJwtException e) {

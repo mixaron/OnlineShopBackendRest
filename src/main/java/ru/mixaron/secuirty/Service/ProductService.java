@@ -10,6 +10,7 @@ import ru.mixaron.secuirty.repositories.CategoryRepo;
 import ru.mixaron.secuirty.repositories.ProductRepo;
 import ru.mixaron.secuirty.util.errorAdvice.CreateCategoryException;
 import ru.mixaron.secuirty.util.errorAdvice.NotFoundEmailException;
+import ru.mixaron.secuirty.util.errorAdvice.NotFoundProductException;
 
 import java.util.List;
 
@@ -48,5 +49,10 @@ public class ProductService {
     public void deleteProduct(ProductDTO product) {
         Product product1 = productRepo.findByName(product.getName()).orElseThrow(NotFoundEmailException::new);
         productRepo.deleteById(product1.getId());
+    }
+
+    public Product oneProduct(String name) {
+        Product product = productRepo.findByName(name).orElseThrow(NotFoundProductException::new);
+            return productRepo.findByName(name).orElseThrow(NotFoundProductException::new);
     }
 }

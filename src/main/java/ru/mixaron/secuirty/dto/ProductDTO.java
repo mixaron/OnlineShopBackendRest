@@ -14,7 +14,6 @@ public class ProductDTO {
     @NotNull(message = "name cannot be null")
     private String name;
 
-    @NotNull(message = "Description cannot be null")
     private String description;
 
     @NotNull(message = "Price cannot be null")

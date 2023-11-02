@@ -55,13 +55,18 @@ public class OrderService {
         return orderRepo.findAllByOrderByPrice();
     }
 
-    public Order watchOrder(UUID id) {
-        return orderRepo.findById(id).orElseThrow(NotFoundOrderById::new);
-    }
+
 
     @Transactional
     public void deleteOrder(OrderDTO order) {
         Order order1 = orderRepo.findByPersonAndProducts(order.getPerson(), order.getProducts()).orElseThrow(NotFoundOrderById::new);
         orderRepo.deleteById(order1.getId());
+    }
+
+    public List<Order> returnAll() {
+        return orderRepo.findAll();
+    }
+    public List<Order> returnAllByPerson(OrderDTO orderDTO) {
+        return orderRepo.findByPerson(orderDTO.getPerson()).orElseThrow(NotFoundEmailException::new);
     }
 }
