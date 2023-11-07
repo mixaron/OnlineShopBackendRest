@@ -28,6 +28,10 @@ public class CategoryService {
         categoryRepo.deleteById(category1.getId());
     }
 
+    public Category findById(CategoryDTO category) {
+        return categoryRepo.findByCategoryName(category.getCategoryName()).orElseThrow(CreateCategoryException::new);
+    }
+
     public List<Category> returnAll() {
         return categoryRepo.findAll();
     }

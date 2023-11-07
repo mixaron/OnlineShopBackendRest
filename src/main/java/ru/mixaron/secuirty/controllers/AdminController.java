@@ -33,13 +33,13 @@ public class AdminController {
     private ResponseEntity<HttpStatus> createCategory(@RequestBody CategoryDTO categoryDTO) {
         Category category = convertToCategory(categoryDTO);
         categoryService.createCategory(category);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteCategory")
     private ResponseEntity<HttpStatus> deleteCategory(@RequestBody CategoryDTO categoryDTO) {
         categoryService.deleteCategory(categoryDTO);
-        return  ResponseEntity.ok(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(HttpStatus.NO_CONTENT);
     }
 
     private Category convertToCategory(CategoryDTO categoryDTO) {
@@ -50,12 +50,12 @@ public class AdminController {
     public ResponseEntity<HttpStatus> createOrder(@RequestBody OrderDTO orderDTO) {
         Order order = convertToOrder(orderDTO);
         orderService.CreateOrder(order);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     }
     @DeleteMapping("/deleteOrder")
     private ResponseEntity<HttpStatus> deleteOrder(@RequestBody OrderDTO orderDTO) {
         orderService.deleteOrder(orderDTO);
-        return  ResponseEntity.ok(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(HttpStatus.NO_CONTENT);
     }
     private Order convertToOrder(OrderDTO orderDTO) {
         return modelMapper.map(orderDTO, Order.class);
@@ -66,12 +66,12 @@ public class AdminController {
     public ResponseEntity<HttpStatus> createProduct(@RequestBody ProductDTO productDTO) {
         Product product = convertToProduct(productDTO);
         productService.createCategory(product);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     }
     @DeleteMapping("/deleteProduct")
     private ResponseEntity<HttpStatus> deleteProduct(@RequestBody ProductDTO productDTO) {
         productService.deleteProduct(productDTO);
-        return  ResponseEntity.ok(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(HttpStatus.NO_CONTENT);
     }
     private Product convertToProduct(ProductDTO productDTO) {
         return modelMapper.map(productDTO, Product.class);

@@ -11,6 +11,8 @@ import java.util.Set;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategoryDTO {
 
     @NotEmpty(message = "Category name cannot be empty")

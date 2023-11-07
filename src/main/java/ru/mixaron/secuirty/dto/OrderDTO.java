@@ -12,6 +12,8 @@ import java.util.Date;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderDTO {
 
 
@@ -28,4 +30,10 @@ public class OrderDTO {
 
     @NotNull(message = "Price cannot be null")
     private double price;
+
+    public OrderDTO(Person person, Product product, String status) {
+        this.person = person;
+        this.products = product;
+        this.status = status;
+    }
 }
