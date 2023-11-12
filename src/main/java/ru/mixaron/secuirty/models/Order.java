@@ -1,5 +1,6 @@
 package ru.mixaron.secuirty.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,10 +26,12 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "person_email", referencedColumnName = "email")
+    @JsonManagedReference
     private Person person;
 
     @ManyToOne
     @JoinColumn(name = "product_name", referencedColumnName = "name")
+    @JsonManagedReference
     private Product products;
 
     @Column(name = "status")
@@ -39,4 +42,18 @@ public class Order {
 
     @Column(name = "price")
     private double price;
+
+    public Order(Person person, Product name, String status) {
+        this.person = person;
+        this.products = name;
+        this.status = status;
+    }
+    public Order(UUID uuid, Person person, Product name, String status) {
+        this.id = id;
+        this.person = person;
+        this.products = name;
+        this.status = status;
+    }
+
+
 }

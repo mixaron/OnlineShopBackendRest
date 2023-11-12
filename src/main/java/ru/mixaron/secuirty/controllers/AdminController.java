@@ -1,6 +1,5 @@
 package ru.mixaron.secuirty.controllers;
 
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,7 @@ public class AdminController {
     @PostMapping("/createOrder")
     public ResponseEntity<HttpStatus> createOrder(@RequestBody OrderDTO orderDTO) {
         Order order = convertToOrder(orderDTO);
-        orderService.CreateOrder(order);
+        orderService.createOrder(order);
         return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     }
     @DeleteMapping("/deleteOrder")
@@ -65,12 +64,13 @@ public class AdminController {
     @PostMapping("/createProduct")
     public ResponseEntity<HttpStatus> createProduct(@RequestBody ProductDTO productDTO) {
         Product product = convertToProduct(productDTO);
-        productService.createCategory(product);
+        productService.createProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     }
     @DeleteMapping("/deleteProduct")
     private ResponseEntity<HttpStatus> deleteProduct(@RequestBody ProductDTO productDTO) {
-        productService.deleteProduct(productDTO);
+        Product product = modelMapper.map(productDTO, Product.class);
+        productService.deleteProduct(product);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(HttpStatus.NO_CONTENT);
     }
     private Product convertToProduct(ProductDTO productDTO) {

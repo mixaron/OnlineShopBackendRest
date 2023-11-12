@@ -1,5 +1,6 @@
 package ru.mixaron.secuirty.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -46,6 +47,7 @@ public class Person implements UserDetails {
 
 
     @OneToMany(mappedBy = "person")
+    @JsonBackReference
     Set<Order> orders;
 
     public Person(String email) {

@@ -51,6 +51,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser(username = "user1", password = "pass", roles = "ADMIN")
 @AutoConfigureMockMvc(addFilters = false)
 public class AdminControllerTests {
+
+    // mockBean дожны быть все как в котнроллере!
     @MockBean
     private CategoryService categoryService;
 
@@ -79,11 +81,11 @@ public class AdminControllerTests {
     private ObjectMapper objectMapper;
 
 
-//    @Test
+    //    @Test
 //    public void shouldCreateCategory() throws Exception {
 //        CategoryDTO categoryDTO = new CategoryDTO("TestControo");
 //
-//        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/admin/createCategory")
+//        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/admin/createProduct")
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .content(objectMapper.writeValueAsString(categoryDTO)))
 //                .andExpect(MockMvcResultMatchers.status().isOk());
@@ -96,7 +98,7 @@ public class AdminControllerTests {
 //        Category category1 = categoryService.returnOne(categoryDTO);
 //        Assertions.assertNull(category1);
 //
-//        categoryService.createCategory(category);
+//        categoryService.createProduct(category);
 //
 //        category1 = categoryService.returnOne(categoryDTO);
 //        Assertions.assertNotNull(category1);
@@ -116,7 +118,7 @@ public class AdminControllerTests {
 
 
 
-     @Test
+    @Test
     @WithMockUser(username = "user1", password = "pass", roles = "ADMIN")
     public void testDeleteCategory() throws Exception {
         // Создаем объект CategoryDTO для передачи в запрос
@@ -129,7 +131,7 @@ public class AdminControllerTests {
                 .andExpect(status().isNoContent());
 
         // Проверяем, что метод deleteCategory у categoryService был вызван с переданным объектом CategoryDTO
-         Mockito.verify(categoryService).deleteCategory(Mockito.eq(categoryDTO));
+        Mockito.verify(categoryService).deleteCategory(Mockito.eq(categoryDTO));
     }
 
     @Test
@@ -138,7 +140,7 @@ public class AdminControllerTests {
         String orderDTOJson = "{ \"person\": \"Anton@gmail.com\", \"products\": \"4080\", \"status\": \"Ожидает оплаты\" }";
 
         mockMvc.perform(post("/api/v1/admin/createOrder").contentType(MediaType.APPLICATION_JSON)
-                .content(orderDTOJson))
+                        .content(orderDTOJson))
                 .andExpect(status().isCreated())
                 .andDo(print());
     }
@@ -146,10 +148,13 @@ public class AdminControllerTests {
     @Test
     @WithMockUser(username = "user1", password = "pass", roles = "ADMIN")
     public void testDeleteOrder() throws Exception {
+        Person person = new Person("Anton@gmail.com", Role.ROLE_USER);
+        Product product = new Product("4080", 400);
+        Order order = new Order(person, product, "123");
         String orderDTOJson = "{ \"person\": \"Anton@gmail.com\", \"products\": \"4080\", \"status\": \"Ожидает оплаты\" }";
 
         mockMvc.perform(delete("/api/v1/admin/deleteOrder").contentType(MediaType.APPLICATION_JSON)
-                        .content(orderDTOJson))
+                        .content(objectMapper.writeValueAsString(order)))
                 .andExpect(status().isNoContent())
                 .andDo(print());
     }
@@ -179,4 +184,3 @@ public class AdminControllerTests {
                 .andDo(print());
     }
 }
-

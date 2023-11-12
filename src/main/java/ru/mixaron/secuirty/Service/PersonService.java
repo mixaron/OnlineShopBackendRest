@@ -31,16 +31,17 @@ public class PersonService {
 
 
     @Transactional
-    public void changePassword(String oldPassword, String newPassword, String email) {
+    public boolean changePassword(String oldPassword, String newPassword, String email) {
         Person person = personRepo.findByEmail(email).orElseThrow(NotFoundEmailException::new);
         if (oldPassword != null && passwordEncoder.matches(oldPassword, person.getPassword()) && !Objects.equals(oldPassword, newPassword)) {
             person.setPassword(passwordEncoder.encode(newPassword));
             personRepo.save(person);
+            return true;
         }
         else throw new UnkownPassword();
     }
 
-    // не работает changeEmail
+
     @Transactional
     public boolean changeEmail(String oldEmail, String newEmail) {
         Person person = personRepo.findByEmail(oldEmail).orElseThrow(NotFoundEmailException::new);

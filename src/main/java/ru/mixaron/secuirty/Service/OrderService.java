@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mixaron.secuirty.dto.OrderDTO;
 import ru.mixaron.secuirty.models.Order;
-import ru.mixaron.secuirty.models.Person;
 import ru.mixaron.secuirty.models.Product;
 import ru.mixaron.secuirty.repositories.OrderRepo;
 import ru.mixaron.secuirty.repositories.PersonRepo;
@@ -16,7 +15,6 @@ import ru.mixaron.secuirty.util.errorAdvice.NotFoundProductException;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -29,7 +27,7 @@ public class OrderService {
     private final ProductRepo productRepo;
 
     @Transactional
-    public void CreateOrder(Order order) {
+    public void createOrder(Order order) {
         order.setDateOfCreation(new Date());
         order.setStatus("Оплачен");
         order.setPerson(personRepo.findByEmail(order.getPerson().getEmail()).orElseThrow(NotFoundEmailException::new));

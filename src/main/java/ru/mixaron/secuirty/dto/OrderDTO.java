@@ -5,6 +5,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ru.mixaron.secuirty.models.Order;
 import ru.mixaron.secuirty.models.Person;
 import ru.mixaron.secuirty.models.Product;
 
@@ -14,7 +15,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDTO {
+public class OrderDTO extends Order {
 
 
     @NotNull(message = "Person cannot be null")

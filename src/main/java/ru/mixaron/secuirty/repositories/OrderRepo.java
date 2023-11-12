@@ -23,7 +23,7 @@ public interface OrderRepo extends JpaRepository<Order, Integer> {
 
     List<Order> findAllByOrderByPrice();
 
-    Optional<Order> findById(UUID id);
+//    Optional<Order> findById(UUID id);
 
     Optional<List<Order>> findByPerson(Person person);
 

@@ -1,5 +1,6 @@
 package ru.mixaron.secuirty.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ public class Category {
     private String categoryName;
 
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
     private Set<Product> products;
 
     public Category(String categoryName) {

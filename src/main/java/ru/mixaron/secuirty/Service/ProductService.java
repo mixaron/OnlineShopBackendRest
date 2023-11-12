@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mixaron.secuirty.dto.ProductDTO;
-import ru.mixaron.secuirty.models.Category;
 import ru.mixaron.secuirty.models.Product;
 import ru.mixaron.secuirty.repositories.CategoryRepo;
 import ru.mixaron.secuirty.repositories.ProductRepo;
@@ -23,7 +22,7 @@ public class ProductService {
     private final CategoryRepo categoryRepo;
 
     @Transactional
-    public void createCategory(Product product) {
+    public void createProduct(Product product) {
         product.setCategory(categoryRepo.findByCategoryName(product.getCategory().getCategoryName()).orElseThrow(CreateCategoryException::new));
         productRepo.save(product);
     }
@@ -46,7 +45,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void deleteProduct(ProductDTO product) {
+    public void deleteProduct(Product product) {
         Product product1 = productRepo.findByName(product.getName()).orElseThrow(NotFoundEmailException::new);
         productRepo.deleteById(product1.getId());
     }
