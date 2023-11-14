@@ -2,8 +2,10 @@ package ru.mixaron.secuirty.service;
 
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.mixaron.secuirty.Service.ProductService;
 import ru.mixaron.secuirty.models.Category;
 import ru.mixaron.secuirty.models.Product;
@@ -14,9 +16,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class ProductServiceTests {
 
-    ProductService productService = Mockito.mock(ProductService.class);
+    @Mock
+    ProductService productService;
 
     private final Category category = new Category("123");
 

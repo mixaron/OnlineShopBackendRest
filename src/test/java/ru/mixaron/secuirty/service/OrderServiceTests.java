@@ -1,8 +1,12 @@
 package ru.mixaron.secuirty.service;
 
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.mixaron.secuirty.Service.OrderService;
 import ru.mixaron.secuirty.dto.OrderDTO;
 import ru.mixaron.secuirty.models.Order;
@@ -16,17 +20,21 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class OrderServiceTests {
-    OrderService orderService = Mockito.mock(OrderService.class);
-    private final Person person = new Person("Anton@gmail.com", Role.ROLE_USER);
-    private final Product product = new Product("4080", 400);
-    private final Order order = new Order(person, product, "123");
-    private final Product product2 = new Product("4070", 600);
-    private final Person person1 = new Person("Anton1@gmail.com", Role.ROLE_USER);
-    private final Order order2 = new Order(person1, product2, "234");
 
-    private final OrderDTO orderDTO = new OrderDTO(person, product, "123");
+    @Mock
+    private OrderService orderService;
 
+
+         final Person person = new Person("Anton@gmail.com", Role.ROLE_USER);
+         final Product product = new Product("4080", 400);
+         final Order order = new Order(person, product, "123");
+         final Product product2 = new Product("4070", 600);
+         final Person person1 = new Person("Anton1@gmail.com", Role.ROLE_USER);
+         final Order order2 = new Order(person1, product2, "234");
+
+         final OrderDTO orderDTO = new OrderDTO(person, product, "123");
 
     @Test
     public void testCreateOrder() {

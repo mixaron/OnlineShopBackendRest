@@ -2,10 +2,12 @@ package ru.mixaron.secuirty.service;
 
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 
-
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.mixaron.secuirty.Service.CategoryService;
 
 import ru.mixaron.secuirty.dto.CategoryDTO;
@@ -19,10 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 
+@ExtendWith(MockitoExtension.class)
 public class CategoryServiceTests {
 
-
-    private final CategoryService categoryService = Mockito.mock(CategoryService.class);
+    @Mock
+    private CategoryService categoryService;
 
 
     @Test

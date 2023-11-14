@@ -1,5 +1,6 @@
 package ru.mixaron.secuirty.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,11 +28,13 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "person_email", referencedColumnName = "email")
     @JsonManagedReference
+    @JsonIgnore
     private Person person;
 
     @ManyToOne
     @JoinColumn(name = "product_name", referencedColumnName = "name")
     @JsonManagedReference
+    @JsonIgnore
     private Product products;
 
     @Column(name = "status")

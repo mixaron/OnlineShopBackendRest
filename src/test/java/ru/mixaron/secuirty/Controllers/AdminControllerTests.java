@@ -137,10 +137,12 @@ public class AdminControllerTests {
     @Test
     @WithMockUser(username = "user1", password = "pass", roles = "ADMIN")
     public void testCreateOrder() throws Exception {
-        String orderDTOJson = "{ \"person\": \"Anton@gmail.com\", \"products\": \"4080\", \"status\": \"Ожидает оплаты\" }";
+        Person person = new Person("Anton@gmail.com", Role.ROLE_USER);
+        Product product = new Product("4080", 400);
+        Order order = new Order(person, product, "123");
 
         mockMvc.perform(post("/api/v1/admin/createOrder").contentType(MediaType.APPLICATION_JSON)
-                        .content(orderDTOJson))
+                        .content(objectMapper.writeValueAsString(order)))
                 .andExpect(status().isCreated())
                 .andDo(print());
     }
@@ -151,7 +153,7 @@ public class AdminControllerTests {
         Person person = new Person("Anton@gmail.com", Role.ROLE_USER);
         Product product = new Product("4080", 400);
         Order order = new Order(person, product, "123");
-        String orderDTOJson = "{ \"person\": \"Anton@gmail.com\", \"products\": \"4080\", \"status\": \"Ожидает оплаты\" }";
+
 
         mockMvc.perform(delete("/api/v1/admin/deleteOrder").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(order)))
